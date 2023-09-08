@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Indian Flavors</string>
+    <string name="content_desc_image_banner_promo">gambar banner promo</string>
+    <string name="text_greeting_user">Halo Izzudin</string>
+    <string name="text_what_you_want_to_eat_today">Mau makan apa hari ini?</string>
+    <string name="text_promo">Diskon 30% semua item</string>
+    <string name="content_desc_icon_cart">ikon keranjang</string>
+    <string name="content_desc_image_butter_chicken">gambar butter chicken</string>
+    <string name="content_desc_icon_notification">ikon notifikasi</string>
+    <string name="content_desc_icon_user_profile">ikon profil pengguna</string>
+    <string name="content_desc_image_chicken_curry">gambar chicken curry</string>
+    <string name="content_desc_image_keema_biryani">gambar keema biryani</string>
+    <string name="content_desc_image_naan">gambar naan</string>
+    <string name="content_desc_image_logo">gambar logo</string>
+    <string name="content_desc_image_white_logo">gambar logo putih</string>
+    <string name="text_recomended_menu">Rekomendasi Menu</string>
+    <string name="text_see_all">Lihat Semua</string>
+</resources>
