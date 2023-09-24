@@ -1,7 +1,8 @@
-package com.izzed.indianflavors
+package com.izzed.indianflavors.presentation.main
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import com.izzed.indianflavors.R
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
