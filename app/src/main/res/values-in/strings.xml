@@ -16,4 +16,12 @@
     <string name="content_desc_image_white_logo">gambar logo putih</string>
     <string name="text_recomended_menu">Rekomendasi Menu</string>
     <string name="text_see_all">Lihat Semua</string>
+    <string name="text_button_back">tombol kembali</string>
+    <string name="text_location">Lokasi</string>
+    <string name="content_desc_button_minus">tombol kurang</string>
+    <string name="text_add_to_cart">"Tambah ke keranjang - "</string>
+    <string name="content_desc_button_plus">tombol tambah</string>
+    <string name="content_desc_icon_location">ikon lokasi</string>
+    <string name="content_desc_image_product">gambar produk</string>
+    <string name="content_desc_setup_control_button">tombol kontrol setup</string>
 </resources>

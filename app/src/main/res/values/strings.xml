@@ -25,10 +25,22 @@
     <string name="text_rp_50_000" translatable="false">Rp 50.000</string>
     <string name="text_rp_42_000" translatable="false">Rp 42.000</string>
     <string name="text_rp_10_000" translatable="false">Rp 10.000</string>
-    <string name="text_recomended_menu">Recomended Menu</string>
+    <string name="text_recomended_menu">Recommended Menu</string>
     <string name="text_butter_chicken" translatable="false">Butter Chicken</string>
     <string name="text_see_all">See All</string>
     <string name="text_chicken_curry" translatable="false">Chicken Curry</string>
     <string name="text_keema_biryani" translatable="false">Keema Biryani</string>
     <string name="text_naan" translatable="false">Naan</string>
+    <string name="text_product_desc" translatable="false">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</string>
+    <string name="text_button_back">button back</string>
+    <string name="text_location">Location</string>
+    <string name="text_address" translatable="false">Jl. BSD Green Office Park Jl. BSD Grand Boulevard, Sampora, BSD, Kabupaten Tangerang, Banten 15345</string>
+    <string name="content_desc_button_minus">button minus</string>
+    <string name="text_add_to_cart">Add to cart -</string>
+    <string name="content_desc_button_plus">button plus</string>
+    <string name="text_0" translatable="false">0</string>
+    <string name="text_rp_0" translatable="false">Rp 0</string>
+    <string name="content_desc_icon_location">icon location</string>
+    <string name="content_desc_image_product">image product</string>
+    <string name="content_desc_setup_control_button">setup control button</string>
 </resources>

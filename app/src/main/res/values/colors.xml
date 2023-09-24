@@ -2,6 +2,8 @@
 <resources>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+    <color name="neutral">#DEDEDE</color>
+    <color name="transparant">#AARRGGBB</color>
 
     <color name="app_color_primary">#FF8669</color>
     <color name="app_color_on_primary">#FFFFFF</color>
@@ -14,4 +16,5 @@
 
     <color name="app_color_error">#C44F6F</color>
     <color name="app_color_on_error">#FFFFFF</color>
+
 </resources>
