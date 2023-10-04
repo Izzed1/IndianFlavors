@@ -3,6 +3,7 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
     <color name="neutral">#DEDEDE</color>
+    <color name="on_color_neutral">#999999</color>
     <color name="transparant">#AARRGGBB</color>
 
     <color name="app_color_primary">#FF8669</color>

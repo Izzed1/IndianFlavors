@@ -15,7 +15,7 @@
             android:id="@+id/cl_header"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@drawable/rounded_header"
+            android:background="@drawable/rounded_bottom_20dp"
             android:backgroundTint="@color/app_color_primary"
             android:paddingHorizontal="16dp"
             app:layout_constraintEnd_toEndOf="parent"
