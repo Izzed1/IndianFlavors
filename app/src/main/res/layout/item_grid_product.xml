@@ -14,7 +14,6 @@
         android:contentDescription="@string/content_desc_image_keema_biryani"
         app:circularflow_radiusInDP="30dp"
         app:layout_constraintDimensionRatio="1:1"
-        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.App.CornerSize12dp"
         tools:src="@tools:sample/avatars" />
