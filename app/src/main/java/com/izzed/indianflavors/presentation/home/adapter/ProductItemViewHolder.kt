@@ -11,6 +11,7 @@ class LinearPlanetItemViewHolder(
     private val binding : ItemListProductBinding,
     private val onClickListener : (Product) -> Unit
 ) : RecyclerView.ViewHolder(binding.root), ViewHolderBinder<Product> {
+
     override fun bind(item: Product) {
         binding.ivProduct.load(item.imgUrl){
             crossfade(true)

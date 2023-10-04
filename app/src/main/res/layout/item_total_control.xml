@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal">
+
+    <ImageButton
+        android:id="@+id/ib_minus"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@color/transparant"
+        android:contentDescription="@string/content_desc_button_minus"
+        android:padding="12dp"
+        android:src="@drawable/ic_button_min" />
+
+    <TextView
+        android:id="@+id/tv_item"
+        android:layout_width="24dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:fontFamily="@font/poppins_regular"
+        android:text="@string/text_0"
+        android:textSize="16sp"
+        android:textStyle="bold" />
+
+    <ImageButton
+        android:id="@+id/ib_plus"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@color/transparant"
+        android:contentDescription="@string/content_desc_button_plus"
+        android:padding="12dp"
+        android:src="@drawable/ic_button_plus" />
+</LinearLayout>

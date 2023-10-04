@@ -9,16 +9,18 @@ import android.view.View
 import android.view.ViewGroup
 import coil.load
 import com.izzed.indianflavors.databinding.FragmentDetailBinding
+import com.izzed.indianflavors.databinding.ItemTotalControlBinding
 import com.izzed.indianflavors.model.Product
 import java.text.DecimalFormat
 
 class DetailFragment : Fragment() {
 
     private lateinit var binding: FragmentDetailBinding
+    private lateinit var itemTotalControlBinding: ItemTotalControlBinding
 
-    private val product: Product? by lazy {
-        DetailFragmentArgs.fromBundle(arguments as Bundle).product
-    }
+//    private val product: Product? by lazy {
+////        DetailFragmentArgs.fromBundle(arguments as Bundle).product
+//    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -30,39 +32,41 @@ class DetailFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        itemTotalControlBinding = binding.includeItemTotalControl
+
         setClickListener()
-        showProductData()
+//        showProductData()
         controlTotalItems()
     }
 
     private fun controlTotalItems() {
         var totalItems = 0
 
-        binding.ibMinus.setOnClickListener {
+        itemTotalControlBinding.ibMinus.setOnClickListener {
             if (totalItems > 0) {
                 totalItems--
                 updateTotalItemsText(totalItems)
-                totalPrice(totalItems)
+//                totalPrice(totalItems)
             }
         }
 
-        binding.ibPlus.setOnClickListener {
+        itemTotalControlBinding.ibPlus.setOnClickListener {
             totalItems++
             updateTotalItemsText(totalItems)
-            totalPrice(totalItems)
+//            totalPrice(totalItems)
         }
     }
 
-    private fun totalPrice(totalItems: Int) {
-        val price = product?.price?.replace("Rp", "")?.replace(".", "")?.trim()?.toInt()
-        if (price != null) {
-            val totalPrice = price * totalItems
-            val formattedTotalPrice = formatPrice(totalPrice)
-            binding.tvTotalPrice.text = formattedTotalPrice
-        } else {
-            binding.tvTotalPrice.text = "Price not available"
-        }
-    }
+//    private fun totalPrice(totalItems: Int) {
+//        val price = product?.price?.replace("Rp", "")?.replace(".", "")?.trim()?.toInt()
+//        if (price != null) {
+//            val totalPrice = price * totalItems
+//            val formattedTotalPrice = formatPrice(totalPrice)
+//            binding.tvTotalPrice.text = formattedTotalPrice
+//        } else {
+//            binding.tvTotalPrice.text = "Price not available"
+//        }
+//    }
 
     private fun formatPrice(price: Int): String {
         val formatter = DecimalFormat("#,###")
@@ -70,24 +74,24 @@ class DetailFragment : Fragment() {
     }
 
     private fun updateTotalItemsText(totalItems: Int) {
-        binding.tvItem.text = totalItems.toString()
+        itemTotalControlBinding.tvItem.text = totalItems.toString()
     }
 
-    private fun showProductData() {
-        product?.let { p ->
-            binding.apply {
-                ivProduct.load(p.imgUrl) {
-                    crossfade(true)
-                }
-                tvProductName.text = p.name
-                tvProductPrice.text = p.price
-                tvProductDesc.text = p.desc
-            }
-        }
-    }
+//    private fun showProductData() {
+//        product?.let { p ->
+//            binding.apply {
+//                ivProduct.load(p.imgUrl) {
+//                    crossfade(true)
+//                }
+//                tvProductName.text = p.name
+//                tvProductPrice.text = p.price
+//                tvProductDesc.text = p.desc
+//            }
+//        }
+//    }
 
     private fun setClickListener() {
-        binding.cvLocation.setOnClickListener{
+        binding.clLocation.setOnClickListener{
             navigateToGoogleMaps()
         }
     }
