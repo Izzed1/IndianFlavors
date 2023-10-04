@@ -43,127 +43,144 @@
             app:layout_constraintBottom_toBottomOf="parent" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-    <LinearLayout
-        android:id="@+id/ll_delivery"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:orientation="vertical"
-        app:layout_constraintTop_toBottomOf="@id/cl_action_bar">
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:fontFamily="@font/poppins_regular"
-            android:gravity="center"
-            android:text="Delivery Method"
-            android:textColor="@color/black"
-            android:textSize="12sp"
-            android:textStyle="bold" />
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginHorizontal="20dp"
-            android:orientation="horizontal">
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:background="@drawable/rounded_start_100dp_with_stroke"
-                android:backgroundTint="@color/app_color_secondary"
-                android:fontFamily="@font/poppins_regular"
-                android:gravity="center"
-                android:paddingVertical="9dp"
-                android:text="@string/text_pickup"
-                android:textColor="@color/white"
-                android:textSize="12sp"
-                android:textStyle="bold" />
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:background="@drawable/rounded_end_100dp_with_stroke"
-                android:fontFamily="@font/poppins_regular"
-                android:gravity="center"
-                android:paddingVertical="9dp"
-                android:text="@string/txt_delivery"
-                android:textColor="@color/black"
-                android:textSize="12sp"
-                android:textStyle="bold" />
-        </LinearLayout>
-    </LinearLayout>
-
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rv_cart"
+    <ScrollView
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginHorizontal="8dp"
-        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-        app:layout_constraintTop_toBottomOf="@id/ll_delivery"
-        app:spanCount="1"
-        tools:itemCount="2"
-        tools:listitem="@layout/item_cart" />
+        app:layout_constraintTop_toBottomOf="@id/cl_action_bar"
+        app:layout_constraintBottom_toTopOf="@id/cl_container_button">
 
-    <LinearLayout
-        android:id="@+id/ll_payment"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        app:layout_constraintTop_toBottomOf="@id/rv_cart">
-
-        <TextView
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:fontFamily="@font/poppins_regular"
-            android:gravity="center"
-            android:text="Payment Method"
-            android:textColor="@color/black"
-            android:textSize="12sp"
-            android:textStyle="bold" />
+            android:layout_height="wrap_content">
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginHorizontal="20dp"
-            android:orientation="horizontal">
-
-            <TextView
+            <LinearLayout
+                android:id="@+id/ll_delivery"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:background="@drawable/rounded_start_100dp_with_stroke"
-                android:backgroundTint="@color/app_color_secondary"
-                android:fontFamily="@font/poppins_regular"
-                android:gravity="center"
-                android:paddingVertical="9dp"
-                android:text="Cash"
-                android:textColor="@color/white"
-                android:textSize="12sp"
-                android:textStyle="bold" />
+                android:layout_marginTop="16dp"
+                android:orientation="vertical"
+                app:layout_constraintTop_toTopOf="parent">
 
-            <TextView
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/poppins_regular"
+                    android:gravity="center"
+                    android:text="Delivery Method"
+                    android:textColor="@color/black"
+                    android:textSize="12sp"
+                    android:textStyle="bold" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="20dp"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:background="@drawable/rounded_start_100dp_with_stroke"
+                        android:backgroundTint="@color/app_color_secondary"
+                        android:fontFamily="@font/poppins_regular"
+                        android:gravity="center"
+                        android:paddingVertical="9dp"
+                        android:text="@string/text_pickup"
+                        android:textColor="@color/white"
+                        android:textSize="12sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:background="@drawable/rounded_end_100dp_with_stroke"
+                        android:fontFamily="@font/poppins_regular"
+                        android:gravity="center"
+                        android:paddingVertical="9dp"
+                        android:text="@string/txt_delivery"
+                        android:textColor="@color/black"
+                        android:textSize="12sp"
+                        android:textStyle="bold" />
+                </LinearLayout>
+            </LinearLayout>
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rv_cart"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginHorizontal="8dp"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                app:layout_constraintTop_toBottomOf="@id/ll_delivery"
+                app:spanCount="1"
+                tools:itemCount="20"
+                tools:listitem="@layout/item_cart" />
+
+            <LinearLayout
+                android:id="@+id/ll_payment"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:background="@drawable/rounded_end_100dp_with_stroke"
-                android:fontFamily="@font/poppins_regular"
-                android:gravity="center"
-                android:paddingVertical="9dp"
-                android:text="Digital Wallet"
-                android:textColor="@color/black"
-                android:textSize="12sp"
-                android:textStyle="bold" />
-        </LinearLayout>
-    </LinearLayout>
+                android:orientation="vertical"
+                android:layout_marginBottom="20dp"
+                app:layout_constraintTop_toBottomOf="@id/rv_cart"
+                app:layout_constraintBottom_toBottomOf="parent">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/poppins_regular"
+                    android:gravity="center"
+                    android:text="Payment Method"
+                    android:textColor="@color/black"
+                    android:textSize="12sp"
+                    android:textStyle="bold" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="20dp"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:background="@drawable/rounded_start_100dp_with_stroke"
+                        android:backgroundTint="@color/app_color_secondary"
+                        android:fontFamily="@font/poppins_regular"
+                        android:gravity="center"
+                        android:paddingVertical="9dp"
+                        android:text="Cash"
+                        android:textColor="@color/white"
+                        android:textSize="12sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:background="@drawable/rounded_end_100dp_with_stroke"
+                        android:fontFamily="@font/poppins_regular"
+                        android:gravity="center"
+                        android:paddingVertical="9dp"
+                        android:text="Digital Wallet"
+                        android:textColor="@color/black"
+                        android:textSize="12sp"
+                        android:textStyle="bold" />
+                </LinearLayout>
+            </LinearLayout>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </ScrollView>
 
     <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/cl_container_button"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_margin="16dp"
+        android:paddingHorizontal="16dp"
+        android:paddingVertical="12dp"
+        android:background="@color/white"
         app:layout_constraintBottom_toBottomOf="parent">
 
         <LinearLayout
