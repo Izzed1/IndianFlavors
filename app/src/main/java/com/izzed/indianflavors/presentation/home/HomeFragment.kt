@@ -44,15 +44,15 @@ class HomeFragment : Fragment() {
 
     private val adapterProduct: ProductListAdapter by lazy {
         ProductListAdapter(AdapterLayoutMode.LINEAR) { product: Product ->
-//            navigateToDetail(product)
+            navigateToDetail(product)
         }
     }
 
-//    private fun navigateToDetail(product: Product) {
+    private fun navigateToDetail(product: Product) {
 //        findNavController().navigate(
 //            HomeFragmentDirections.actionHomeFragmentToDetailFragment(product)
 //        )
-//    }
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
