@@ -6,6 +6,5 @@ import com.izzed.indianflavors.data.local.datastore.UserPreferenceDataSource
 import kotlinx.coroutines.Dispatchers
 
 class MainViewModel(private val userPreferenceDataSource: UserPreferenceDataSource) : ViewModel() {
-    val userDarkModeLiveData = userPreferenceDataSource.getUserDarkModePrefFlow().asLiveData(
-        Dispatchers.IO)
+
 }
