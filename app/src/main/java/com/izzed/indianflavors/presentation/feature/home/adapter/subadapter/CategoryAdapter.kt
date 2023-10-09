@@ -12,14 +12,15 @@ class CategoryAdapter (private val onItemClick: (Category) -> Unit):
 
     private var items: MutableList<Category> = mutableListOf()
 
-    fun setData(data: List<Category>) {
+    fun setData(items: List<Category>) {
         this.items.clear()
         this.items.addAll(items)
         notifyDataSetChanged()
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ItemCategoryViewHolder {
-        val binding = ItemCategoryBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        val binding =
+        ItemCategoryBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return ItemCategoryViewHolder(binding, onItemClick)
     }
 

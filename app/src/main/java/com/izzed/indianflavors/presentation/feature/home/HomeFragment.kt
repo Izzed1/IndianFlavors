@@ -54,6 +54,11 @@ class HomeFragment : Fragment() {
 
         setupList()
         fetchData()
+        setupRv()
+    }
+
+    private fun setupRv() {
+
     }
 
     private fun fetchData() {
