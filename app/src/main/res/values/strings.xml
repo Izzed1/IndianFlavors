@@ -51,4 +51,11 @@
     <string name="text_order_confirmation">Order Confirmation</string>
     <string name="text_pickup">Pickup</string>
     <string name="txt_delivery">Delivery</string>
+    <string name="text_notes">notes</string>
+    <string name="total_quantity">x%s</string>
+    <string name="text_cart_is_empty">Cart is Empty</string>
+    <string name="text_muhammad_izzudin">Muhammad Izzudin</string>
+    <string name="text_mohammadzzudin_gmail_com">mohammadzzudin@gmail.com</string>
+    <string name="text_0858_2625_8769">0858-2625-8769</string>
+
 </resources>
