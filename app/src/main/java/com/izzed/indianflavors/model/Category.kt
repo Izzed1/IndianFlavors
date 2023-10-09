@@ -1,11 +1,9 @@
 package com.izzed.indianflavors.model
 
-import android.os.Parcelable
-import kotlinx.parcelize.Parcelize
+import java.util.UUID
 
-@Parcelize
-class Category (
-    val position: Int,
+data class Category (
+    val id: String = UUID.randomUUID().toString(),
     val name: String,
     val imgUrl: String
-): Parcelable
+)

@@ -22,6 +22,7 @@
             android:layout_weight="2">
 
             <com.google.android.material.imageview.ShapeableImageView
+                android:id="@+id/iv_cart"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:scaleType="centerCrop"
@@ -67,11 +68,24 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent">
 
-                <include layout="@layout/item_total_control" />
+                <include
+                    android:id="@+id/include_item_total_control"
+                    layout="@layout/item_total_control" />
             </LinearLayout>
 
+            <TextView
+                android:id="@+id/tv_total_quantity"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/poppins_regular"
+                android:paddingTop="8dp"
+                android:paddingEnd="8dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:text="x2" />
+
             <ImageButton
-                android:id="@+id/iconButton"
+                android:id="@+id/ib_remove"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:background="@color/transparant"
@@ -83,14 +97,21 @@
         </androidx.constraintlayout.widget.ConstraintLayout>
     </LinearLayout>
 
-    <com.google.android.material.textfield.TextInputLayout
+    <com.google.android.material.textfield.TextInputEditText
+        android:id="@+id/et_notes_item"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:background="@drawable/rounded_all_12dp_with_stroke"
         android:backgroundTint="@color/white"
         android:fontFamily="@font/poppins_regular"
+        android:hint="@string/text_notes"
+        android:imeOptions="actionDone"
+        android:inputType="text"
+        android:maxLines="3"
         android:padding="12dp"
-        android:textSize="10sp"
-        app:prefixText="Catatan : " />
+        android:textSize="12sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        tools:text="Jangan pedas" />
+
 </LinearLayout>
