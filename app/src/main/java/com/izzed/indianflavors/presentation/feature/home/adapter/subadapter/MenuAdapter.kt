@@ -7,29 +7,29 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import coil.load
 import com.izzed.indianflavors.databinding.ItemGridProductBinding
-import com.izzed.indianflavors.model.Product
+import com.izzed.indianflavors.model.Menu
 
-class ProductAdapter(private val itemClick: (Product) -> Unit) :
-    RecyclerView.Adapter<ProductAdapter.ItemProductViewHolder>() {
+class MenuAdapter(private val itemClick: (Menu) -> Unit) :
+    RecyclerView.Adapter<MenuAdapter.ItemProductViewHolder>() {
 
     private val dataDiffer =
-        AsyncListDiffer(this, object : DiffUtil.ItemCallback<Product>() {
+        AsyncListDiffer(this, object : DiffUtil.ItemCallback<Menu>() {
             override fun areItemsTheSame(
-                oldItem: Product,
-                newItem: Product
+                oldItem: Menu,
+                newItem: Menu
             ): Boolean {
-                return oldItem.id == newItem.id
+                return oldItem.name == newItem.name
             }
 
             override fun areContentsTheSame(
-                oldItem: Product,
-                newItem: Product
+                oldItem: Menu,
+                newItem: Menu
             ): Boolean {
                 return oldItem.hashCode() == newItem.hashCode()
             }
         })
 
-    fun submitData(data: List<Product>) {
+    fun submitData(data: List<Menu>) {
         dataDiffer.submitList(data)
     }
 
@@ -46,10 +46,10 @@ class ProductAdapter(private val itemClick: (Product) -> Unit) :
 
     class ItemProductViewHolder(
         private val binding: ItemGridProductBinding,
-        val itemClick: (Product) -> Unit
+        val itemClick: (Menu) -> Unit
     ) : RecyclerView.ViewHolder(binding.root) {
 
-        fun bindView(item: Product) {
+        fun bindView(item: Menu) {
             with(item) {
                 binding.ivProduct.load(item.imgUrl){
                     crossfade(true)

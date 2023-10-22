@@ -11,7 +11,7 @@ import com.izzed.indianflavors.databinding.ItemSectionBannerHomeBinding
 import com.izzed.indianflavors.databinding.ItemSectionCategoryHomeBinding
 import com.izzed.indianflavors.databinding.ItemSectionHeaderHomeBinding
 import com.izzed.indianflavors.databinding.ItemSectionProductHomeBinding
-import com.izzed.indianflavors.model.Product
+import com.izzed.indianflavors.model.Menu
 import com.izzed.indianflavors.presentation.feature.home.adapter.model.HomeSection
 import com.izzed.indianflavors.presentation.feature.home.adapter.viewholder.BannerSectionViewHolder
 import com.izzed.indianflavors.presentation.feature.home.adapter.viewholder.CategoriesSectionViewHolder
@@ -20,7 +20,7 @@ import com.izzed.indianflavors.presentation.feature.home.adapter.viewholder.Head
 import com.izzed.indianflavors.presentation.feature.home.adapter.viewholder.ProductsSectionViewHolder
 
 class HomeAdapter(
-    private val onProductClicked: (Product) -> Unit
+    private val onProductClicked: (Menu) -> Unit
 ) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     private val dataDiffer =
