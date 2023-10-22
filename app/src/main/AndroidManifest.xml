@@ -16,6 +16,12 @@
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
         <activity
+            android:name=".presentation.feature.register.RegisterActivity"
+            android:exported="false" />
+        <activity
+            android:name=".presentation.feature.login.LoginActivity"
+            android:exported="false" />
+        <activity
             android:name=".presentation.feature.detail.DetailActivity"
             android:exported="false" />
         <activity

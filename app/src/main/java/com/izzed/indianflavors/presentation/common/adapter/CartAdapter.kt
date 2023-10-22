@@ -19,23 +19,23 @@ class CartListAdapter(private val cartListener: CartListener? = null) :
     RecyclerView.Adapter<ViewHolder>() {
 
     private val dataDiffer =
-        AsyncListDiffer(this, object : DiffUtil.ItemCallback<CartProduct>() {
+        AsyncListDiffer(this, object : DiffUtil.ItemCallback<Cart>() {
             override fun areItemsTheSame(
-                oldItem: CartProduct,
-                newItem: CartProduct
+                oldItem: Cart,
+                newItem: Cart
             ): Boolean {
-                return oldItem.cart.id == newItem.cart.id && oldItem.product.id == newItem.product.id
+                return oldItem.id == newItem.id
             }
 
             override fun areContentsTheSame(
-                oldItem: CartProduct,
-                newItem: CartProduct
+                oldItem: Cart,
+                newItem: Cart
             ): Boolean {
                 return oldItem.hashCode() == newItem.hashCode()
             }
         })
 
-    fun submitData(data: List<CartProduct>) {
+    fun submitData(data: List<Cart>) {
         dataDiffer.submitList(data)
     }
 
@@ -54,7 +54,7 @@ class CartListAdapter(private val cartListener: CartListener? = null) :
     override fun getItemCount(): Int = dataDiffer.currentList.size
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
-        (holder as ViewHolderBinder<CartProduct>).bind(dataDiffer.currentList[position])
+        (holder as ViewHolderBinder<Cart>).bind(dataDiffer.currentList[position])
     }
 
 }
@@ -71,12 +71,12 @@ class CartViewHolder(
 
     private fun setCartData(item: CartProduct) {
         with(binding) {
-            binding.ivCart.load(item.product.imgUrl) {
+            binding.ivCart.load(item.menu.imgUrl) {
                 crossfade(true)
             }
             includeItemTotalControl.tvItem.text = item.cart.itemQuantity.toString()
-            tvProductName.text = item.product.name
-            tvProductPrice.text = (item.cart.itemQuantity * item.product.price).toString()
+            tvProductName.text = item.menu.name
+            tvProductPrice.text = (item.cart.itemQuantity * item.menu.price).toString()
         }
     }
 
@@ -110,7 +110,7 @@ class CartOrderViewHolder(
 
     private fun setCartData(item: CartProduct) {
         with(binding) {
-            binding.ivCheckout.load(item.product.imgUrl) {
+            binding.ivCheckout.load(item.menu.imgUrl) {
                 crossfade(true)
             }
             tvTotalQuantity.text =
@@ -118,8 +118,8 @@ class CartOrderViewHolder(
                     R.string.total_quantity,
                     item.cart.itemQuantity.toString()
                 )
-            tvProductName.text = item.product.name
-            tvProductPrice.text = (item.cart.itemQuantity * item.product.price).toString()
+            tvProductName.text = item.menu.name
+            tvProductPrice.text = (item.cart.itemQuantity * item.menu.price).toString()
         }
     }
 

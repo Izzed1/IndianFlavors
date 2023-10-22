@@ -22,7 +22,6 @@ import com.izzed.indianflavors.presentation.feature.checkout.CheckoutActivity
 import com.izzed.indianflavors.utils.GenericViewModelFactory
 import com.izzed.indianflavors.utils.hideKeyboard
 import com.izzed.indianflavors.utils.proceedWhen
-import com.izzed.indianflavors.utils.toCurrencyFormat
 
 class CartFragment : Fragment() {
 

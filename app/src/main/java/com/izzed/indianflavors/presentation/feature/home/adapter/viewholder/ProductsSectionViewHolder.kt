@@ -4,22 +4,22 @@ import androidx.core.view.isVisible
 import androidx.recyclerview.widget.RecyclerView
 import com.izzed.indianflavors.core.ViewHolderBinder
 import com.izzed.indianflavors.databinding.ItemSectionProductHomeBinding
-import com.izzed.indianflavors.model.Product
+import com.izzed.indianflavors.model.Menu
 import com.izzed.indianflavors.presentation.feature.home.adapter.model.HomeSection
-import com.izzed.indianflavors.presentation.feature.home.adapter.subadapter.ProductAdapter
+import com.izzed.indianflavors.presentation.feature.home.adapter.subadapter.MenuAdapter
 import com.izzed.indianflavors.utils.GridSpacingItemDecoration
 import com.izzed.indianflavors.utils.proceedWhen
 
 class ProductsSectionViewHolder(
     private val binding: ItemSectionProductHomeBinding,
-    private val onClickListener: (Product) -> Unit
+    private val onClickListener: (Menu) -> Unit
 ) : RecyclerView.ViewHolder(binding.root), ViewHolderBinder<HomeSection> {
     private val itemDecoration = GridSpacingItemDecoration(2, 48, true)
     init {
         binding.rvProductList.addItemDecoration(itemDecoration)
     }
-    private val adapter: ProductAdapter by lazy {
-        ProductAdapter {
+    private val adapter: MenuAdapter by lazy {
+        MenuAdapter {
             onClickListener.invoke(it)
         }
     }

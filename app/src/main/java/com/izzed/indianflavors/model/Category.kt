@@ -2,8 +2,7 @@ package com.izzed.indianflavors.model
 
 import java.util.UUID
 
-data class Category (
-    val id: String = UUID.randomUUID().toString(),
-    val name: String,
-    val imgUrl: String
+data class Category(
+    val name: String?,
+    val categoryImgUrl: String?
 )

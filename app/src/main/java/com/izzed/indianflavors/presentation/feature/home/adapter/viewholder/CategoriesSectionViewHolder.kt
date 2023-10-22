@@ -20,7 +20,6 @@ class CategoriesSectionViewHolder(
             binding.rvCategory.apply {
                 adapter = this@CategoriesSectionViewHolder.adapter
             }
-            adapter.setData(items = item.data)
         }
     }
 }
