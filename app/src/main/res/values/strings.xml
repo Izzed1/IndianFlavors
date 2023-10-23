@@ -68,6 +68,25 @@
     <string name="text_okay">Okay</string>
     <string name="text_total">Total :</string>
     <string name="text_not_registered_yet_register_here">Not registered yet Register Here</string>
+    <string name="text_checkout">Checkout</string>
+    <string name="text_login">Login</string>
+    <string name="text_register">Register</string>
+    <string name="text_already_have_an_account_login_here">Already have an account? Login Here</string>
+    <string name="text_total_">Total :</string>
+    <string name="text_change_profile">Change Profile</string>
+    <string name="content_desc_button_edit_photo">button edit photo</string>
+    <string name="text_change_password">Change Password</string>
+    <string name="text_logout">Logout</string>
+    <string name="content_desc_button_trash">button trash</string>
+    <string name="text_confirm_password">Confirm password</string>
+    <string name="text_email">Email</string>
+    <string name="text_name">Name</string>
+    <string name="text_password">Password</string>
+    <string name="text_delivery_method">Delivery Method</string>
+    <string name="text_payment_method">Payment Method</string>
+    <string name="text_cash">Cash</string>
+    <string name="text_delivery">Delivery</string>
+    <string name="text_e_wallet">E-Wallet</string>
 
 
 </resources>

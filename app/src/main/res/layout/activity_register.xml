@@ -29,7 +29,7 @@
             android:id="@+id/btn_register"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Register" />
+            android:text="@string/text_register" />
 
         <com.google.android.material.progressindicator.CircularProgressIndicator
             android:id="@+id/pb_loading"
@@ -41,11 +41,11 @@
     </FrameLayout>
 
     <TextView
-        android:id="@+id/tv_nav_to_login"
+        android:id="@+id/tv_nav_to_register"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="16dp"
-        android:text="Already have an account? Login Here"
+        android:text="@string/text_already_have_an_account_login_here"
         android:textAlignment="center"
         app:layout_constraintTop_toBottomOf="@id/fl_btn_loading_state" />
 

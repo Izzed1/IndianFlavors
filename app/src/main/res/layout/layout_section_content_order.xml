@@ -23,7 +23,7 @@
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/poppins_regular"
                 android:gravity="center"
-                android:text="Delivery Method"
+                android:text="@string/text_delivery_method"
                 android:textColor="@color/black"
                 android:textSize="12sp"
                 android:textStyle="bold" />
@@ -45,7 +45,7 @@
                     android:background="@drawable/selector_toogle_background"
                     android:button="@null"
                     android:gravity="center"
-                    android:text="Pickup"
+                    android:text="@string/text_pickup"
                     android:textColor="@drawable/selector_toogle_text_color" />
 
                 <RadioButton
@@ -56,7 +56,7 @@
                     android:background="@drawable/selector_toogle_background"
                     android:button="@null"
                     android:gravity="center"
-                    android:text="Delivery"
+                    android:text="@string/text_delivery"
                     android:textColor="@drawable/selector_toogle_text_color" />
             </RadioGroup>
 
@@ -88,7 +88,7 @@
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/poppins_regular"
                 android:gravity="center"
-                android:text="Payment Method"
+                android:text="@string/text_payment_method"
                 android:textColor="@color/black"
                 android:textSize="12sp"
                 android:textStyle="bold" />
@@ -110,7 +110,7 @@
                     android:background="@drawable/selector_toogle_background"
                     android:button="@null"
                     android:gravity="center"
-                    android:text="Cash"
+                    android:text="@string/text_cash"
                     android:textColor="@drawable/selector_toogle_text_color" />
 
                 <RadioButton
@@ -121,7 +121,7 @@
                     android:background="@drawable/selector_toogle_background"
                     android:button="@null"
                     android:gravity="center"
-                    android:text="E-Wallet"
+                    android:text="@string/text_e_wallet"
                     android:textColor="@drawable/selector_toogle_text_color" />
             </RadioGroup>
         </LinearLayout>
