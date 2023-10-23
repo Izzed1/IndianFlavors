@@ -6,7 +6,7 @@
     <string name="content_desc_menu_snacks" translatable="false">menu snacks</string>
     <string name="text_snacks" translatable="false">Snacks</string>
     <string name="content_desc_menu_baverages" translatable="false">menu baverages</string>
-    <string name="text_greeting_user">Hello Izzudin,</string>
+    <string name="text_greeting_user">Hello </string>
     <string name="text_what_you_want_to_eat_today">what you want to eat today?</string>
     <string name="text_title_promo" translatable="false">PROMO GRAND OPENING</string>
     <string name="text_promo">Discount 30% All Items</string>
@@ -57,5 +57,17 @@
     <string name="text_muhammad_izzudin">Muhammad Izzudin</string>
     <string name="text_mohammadzzudin_gmail_com">mohammadzzudin@gmail.com</string>
     <string name="text_0858_2625_8769">0858-2625-8769</string>
+    <string name="text_error_password_empty">Password should not be empty</string>
+    <string name="text_error_password_less_than_8_char">Password cannot less than 8 character</string>
+    <string name="text_highlight_register">Register Here</string>
+    <string name="text_error_email_empty">Email should not be empty</string>
+    <string name="text_error_email_invalid">Enter a valid format email</string>
+    <string name="text_highlight_login_here">Login Here</string>
+    <string name="text_error_name_cannot_empty">Name cannot be empty</string>
+    <string name="text_password_does_not_match">Password doesn\'t match</string>
+    <string name="text_okay">Okay</string>
+    <string name="text_total">Total :</string>
+    <string name="text_not_registered_yet_register_here">Not registered yet Register Here</string>
+
 
 </resources>

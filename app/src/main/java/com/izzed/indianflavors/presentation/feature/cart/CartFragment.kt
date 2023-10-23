@@ -8,15 +8,22 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
+import com.chuckerteam.chucker.api.ChuckerInterceptor
+import com.google.firebase.auth.FirebaseAuth
 import com.izzed.indianflavors.R
 import com.izzed.indianflavors.data.local.database.AppDatabase
 import com.izzed.indianflavors.data.local.database.datasource.CartDataSource
 import com.izzed.indianflavors.data.local.database.datasource.CartDatabaseDataSource
+import com.izzed.indianflavors.data.network.api.datasource.RestaurantApiDataSource
+import com.izzed.indianflavors.data.network.api.service.RestaurantApiService
+import com.izzed.indianflavors.data.network.firebase.auth.FirebaseAuthDataSourceImpl
 import com.izzed.indianflavors.data.repository.CartRepository
 import com.izzed.indianflavors.data.repository.CartRepositoryImpl
+import com.izzed.indianflavors.data.repository.UserRepository
+import com.izzed.indianflavors.data.repository.UserRepositoryImpl
 import com.izzed.indianflavors.databinding.FragmentCartBinding
 import com.izzed.indianflavors.model.Cart
-import com.izzed.indianflavors.presentation.common.adapter.CartListAdapter
+import com.izzed.indianflavors.presentation.common.adapter.CartAdapter
 import com.izzed.indianflavors.presentation.common.adapter.CartListener
 import com.izzed.indianflavors.presentation.feature.checkout.CheckoutActivity
 import com.izzed.indianflavors.utils.GenericViewModelFactory
@@ -31,12 +38,18 @@ class CartFragment : Fragment() {
         val database = AppDatabase.getInstance(requireContext())
         val cartDao = database.cartDao()
         val cartDataSource: CartDataSource = CartDatabaseDataSource(cartDao)
-        val repo: CartRepository = CartRepositoryImpl(cartDataSource)
+        val chuckerInterceptor = ChuckerInterceptor(requireContext().applicationContext)
+        val service = RestaurantApiService.invoke(chuckerInterceptor)
+        val apiDataSource = RestaurantApiDataSource(service)
+        val firebaseAuth = FirebaseAuth.getInstance()
+        val authDataSource = FirebaseAuthDataSourceImpl(firebaseAuth)
+        val userRepository: UserRepository = UserRepositoryImpl(authDataSource)
+        val repo: CartRepository = CartRepositoryImpl(cartDataSource, apiDataSource, userRepository)
         GenericViewModelFactory.create(CartViewModel(repo))
     }
 
-    private val adapter: CartListAdapter by lazy {
-        CartListAdapter(object : CartListener {
+    private val adapter: CartAdapter by lazy {
+        CartAdapter(object : CartListener {
             override fun onPlusTotalItemCartClicked(cart: Cart) {
                 viewModel.increaseCart(cart)
             }

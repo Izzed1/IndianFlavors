@@ -1,4 +1,4 @@
-package com.izzed.indianflavors.presentation.feature.login
+package com.izzed.indianflavors.presentation.feature.register
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
@@ -12,49 +12,49 @@ import com.google.firebase.auth.FirebaseAuth
 import com.izzed.indianflavors.R
 import com.izzed.indianflavors.data.network.firebase.auth.FirebaseAuthDataSourceImpl
 import com.izzed.indianflavors.data.repository.UserRepositoryImpl
-import com.izzed.indianflavors.databinding.ActivityLoginBinding
+import com.izzed.indianflavors.databinding.ActivityRegisterBinding
+import com.izzed.indianflavors.presentation.feature.login.LoginActivity
 import com.izzed.indianflavors.presentation.feature.main.MainActivity
-import com.izzed.indianflavors.presentation.feature.register.RegisterActivity
 import com.izzed.indianflavors.utils.GenericViewModelFactory
 import com.izzed.indianflavors.utils.highLightWord
 import com.izzed.indianflavors.utils.proceedWhen
 
-class LoginActivity : AppCompatActivity() {
+class RegisterActivity : AppCompatActivity() {
 
-    private  val binding: ActivityLoginBinding by lazy {
-        ActivityLoginBinding.inflate(layoutInflater)
+    private val binding: ActivityRegisterBinding by lazy {
+        ActivityRegisterBinding.inflate(layoutInflater)
     }
-
-    private val viewModel: LoginViewModel by viewModels {
+    private val viewModel: RegisterViewModel by viewModels {
         GenericViewModelFactory.create(createViewModel())
     }
 
-    private fun createViewModel(): LoginViewModel {
+    private fun createViewModel(): RegisterViewModel {
         val firebaseAuth = FirebaseAuth.getInstance()
         val dataSource = FirebaseAuthDataSourceImpl(firebaseAuth)
         val repo = UserRepositoryImpl(dataSource)
-        return LoginViewModel(repo)
+        return RegisterViewModel(repo)
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
+
         setupForm()
         setClickListeners()
         observeResult()
     }
 
     private fun observeResult() {
-        viewModel.loginResult.observe(this) {
+        viewModel.registerResult.observe(this) {
             it.proceedWhen(
                 doOnSuccess = {
                     binding.pbLoading.isVisible = false
-                    binding.btnLogin.isVisible = true
+                    binding.btnRegister.isVisible = true
                     navigateToMain()
                 },
                 doOnError = {
                     binding.pbLoading.isVisible = false
-                    binding.btnLogin.isVisible = true
+                    binding.btnRegister.isVisible = true
                     Toast.makeText(
                         this,
                         "Login Failed : ${it.exception?.message.orEmpty()}",
@@ -63,41 +63,68 @@ class LoginActivity : AppCompatActivity() {
                 },
                 doOnLoading = {
                     binding.pbLoading.isVisible = true
-                    binding.btnLogin.isVisible = false
+                    binding.btnRegister.isVisible = false
                 }
             )
         }
     }
 
+    private fun navigateToMain() {
+        startActivity(Intent(this, MainActivity::class.java).apply {
+            flags = Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK
+        })
+    }
+
     private fun setClickListeners() {
-        binding.btnLogin.setOnClickListener {
-            doLogin()
+        binding.btnRegister.setOnClickListener {
+            doRegister()
         }
-        binding.tvNavToRegister.highLightWord(getString(R.string.text_highlight_register)) {
-            navigateToRegister()
+        binding.tvNavToLogin.highLightWord(getString(R.string.text_highlight_login_here)) {
+            navigateToLogin()
         }
     }
 
-    private fun navigateToRegister() {
-        startActivity(Intent(this, RegisterActivity::class.java).apply {
+    private fun navigateToLogin() {
+        startActivity(Intent(this, LoginActivity::class.java).apply {
             flags = Intent.FLAG_ACTIVITY_SINGLE_TOP or Intent.FLAG_ACTIVITY_CLEAR_TOP
         })
     }
 
-    private fun doLogin() {
+    private fun doRegister() {
         if (isFormValid()) {
             val email = binding.layoutForm.etEmail.text.toString().trim()
             val password = binding.layoutForm.etPassword.text.toString().trim()
-            viewModel.doLogin(email, password)
+            val fullName = binding.layoutForm.etName.text.toString().trim()
+            viewModel.doRegister(fullName, email, password)
         }
     }
 
     private fun isFormValid(): Boolean {
-        val email = binding.layoutForm.etEmail.text.toString().trim()
         val password = binding.layoutForm.etPassword.text.toString().trim()
+        val confirmPassword = binding.layoutForm.etConfirmPassword.text.toString().trim()
+        val fullName = binding.layoutForm.etName.text.toString().trim()
+        val email = binding.layoutForm.etEmail.text.toString().trim()
 
-        return checkEmailValidation(email) &&
-                checkPasswordValidation(password, binding.layoutForm.tilPassword)
+        return checkNameValidation(fullName) && checkEmailValidation(email) &&
+                checkPasswordValidation(password, binding.layoutForm.tilPassword) &&
+                checkPasswordValidation(confirmPassword, binding.layoutForm.tilConfirmPassword) &&
+                checkPwdAndConfirmPwd(password, confirmPassword)
+    }
+
+    private fun checkPwdAndConfirmPwd(password: String, confirmPassword: String): Boolean {
+        return if (password != confirmPassword) {
+            binding.layoutForm.tilPassword.isErrorEnabled = true
+            binding.layoutForm.tilPassword.error =
+                getString(R.string.text_password_does_not_match)
+            binding.layoutForm.tilConfirmPassword.isErrorEnabled = true
+            binding.layoutForm.tilConfirmPassword.error =
+                getString(R.string.text_password_does_not_match)
+            false
+        } else {
+            binding.layoutForm.tilPassword.isErrorEnabled = false
+            binding.layoutForm.tilConfirmPassword.isErrorEnabled = false
+            true
+        }
     }
 
     private fun checkPasswordValidation(confirmPassword: String, textInputLayout: TextInputLayout): Boolean {
@@ -132,16 +159,23 @@ class LoginActivity : AppCompatActivity() {
         }
     }
 
-    private fun navigateToMain() {
-        startActivity(Intent(this, MainActivity::class.java).apply {
-            flags = Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK
-        })
+    private fun checkNameValidation(fullName: String): Boolean {
+        return if (fullName.isEmpty()) {
+            binding.layoutForm.tilName.isErrorEnabled = true
+            binding.layoutForm.tilName.error = getString(R.string.text_error_name_cannot_empty)
+            false
+        } else {
+            binding.layoutForm.tilName.isErrorEnabled = false
+            true
+        }
     }
 
     private fun setupForm() {
         with(binding.layoutForm) {
             tilEmail.isVisible = true
             tilPassword.isVisible = true
+            tilName.isVisible = true
+            tilConfirmPassword.isVisible = true
         }
     }
 }
