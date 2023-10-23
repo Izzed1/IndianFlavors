@@ -142,7 +142,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@drawable/rounded_container_cart"
-        android:backgroundTint="@color/neutral"
+        android:backgroundTint="@color/neutral_500"
         android:gravity="center"
         android:orientation="horizontal"
         app:layout_constraintTop_toBottomOf="@id/sv_content"

@@ -1,5 +1,6 @@
 package com.izzed.indianflavors.data.network.api.service
 
+import com.chuckerteam.chucker.api.ChuckerInterceptor
 import com.izzed.indianflavors.BuildConfig
 import com.izzed.indianflavors.data.network.api.model.category.CategoryResponse
 import com.izzed.indianflavors.data.network.api.model.menu.MenusResponse
@@ -24,8 +25,9 @@ interface RestaurantApiService {
 
     companion object {
         @JvmStatic
-        operator fun invoke(): RestaurantApiService {
+        operator fun invoke(chucker: ChuckerInterceptor): RestaurantApiService {
             val okHttpClient = OkHttpClient.Builder()
+                .addInterceptor(chucker)
                 .connectTimeout(120, TimeUnit.SECONDS)
                 .readTimeout(120, TimeUnit.SECONDS)
                 .build()

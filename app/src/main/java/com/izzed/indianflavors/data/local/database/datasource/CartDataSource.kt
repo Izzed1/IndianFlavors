@@ -35,6 +35,6 @@ class CartDatabaseDataSource(private val cartDao: CartDao) : CartDataSource {
     }
 
     override suspend fun deleteAll() {
-        cartDao.deleteCart()
+        cartDao.deleteAll()
     }
 }

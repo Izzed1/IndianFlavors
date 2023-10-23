@@ -7,6 +7,8 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.izzed.indianflavors.core.ViewHolderBinder
 import com.izzed.indianflavors.databinding.ItemEmptyViewHolderBinding
+import com.izzed.indianflavors.databinding.ItemGridProductBinding
+import com.izzed.indianflavors.databinding.ItemListProductBinding
 import com.izzed.indianflavors.databinding.ItemSectionBannerHomeBinding
 import com.izzed.indianflavors.databinding.ItemSectionCategoryHomeBinding
 import com.izzed.indianflavors.databinding.ItemSectionHeaderHomeBinding
@@ -20,6 +22,7 @@ import com.izzed.indianflavors.presentation.feature.home.adapter.viewholder.Head
 import com.izzed.indianflavors.presentation.feature.home.adapter.viewholder.ProductsSectionViewHolder
 
 class HomeAdapter(
+    var adapterLayoutMode: AdapterLayoutMode,
     private val onProductClicked: (Menu) -> Unit
 ) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
@@ -39,60 +42,22 @@ class HomeAdapter(
             }
         })
 
-    fun submitData(data: List<HomeSection>) {
-        dataDiffer.submitList(data)
-    }
-
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         return when (viewType) {
-            ITEM_TYPE_HEADER -> {
-                HeaderSectionViewHolder(
-                    ItemSectionHeaderHomeBinding.inflate(
-                        LayoutInflater.from(parent.context),
-                        parent,
-                        false
-                    )
+            AdapterLayoutMode.GRID.ordinal -> {
+                GridMenuItemViewHolder(
+                    binding = ItemGridProductBinding.inflate(
+                        LayoutInflater.from(parent.context),parent,false
+                    ),onProductClicked
                 )
             }
-
-            ITEM_TYPE_BANNER -> {
-                BannerSectionViewHolder(
-                    ItemSectionBannerHomeBinding.inflate(
-                        LayoutInflater.from(parent.context),
-                        parent,
-                        false
-                    )
+            else -> {
+                LinearMenuItemViewHolder(
+                    binding = ItemListProductBinding.inflate(
+                        LayoutInflater.from(parent.context),parent,false
+                    ),onProductClicked
                 )
             }
-
-            ITEM_TYPE_CATEGORY_LIST -> {
-                CategoriesSectionViewHolder(
-                    ItemSectionCategoryHomeBinding.inflate(
-                        LayoutInflater.from(parent.context),
-                        parent,
-                        false
-                    )
-                )
-            }
-
-            ITEM_TYPE_PRODUCT_LIST -> {
-                ProductsSectionViewHolder(
-                    ItemSectionProductHomeBinding.inflate(
-                        LayoutInflater.from(parent.context),
-                        parent,
-                        false
-                    ),
-                    onProductClicked
-                )
-            }
-
-            else -> EmptyViewHolder(
-                ItemEmptyViewHolderBinding.inflate(
-                    LayoutInflater.from(parent.context),
-                    parent,
-                    false
-                )
-            )
         }
     }
 
@@ -103,12 +68,7 @@ class HomeAdapter(
     override fun getItemCount(): Int = dataDiffer.currentList.size
 
     override fun getItemViewType(position: Int): Int {
-        return when (dataDiffer.currentList[position]) {
-            HomeSection.HeaderSection -> ITEM_TYPE_HEADER
-            HomeSection.BannerSection -> ITEM_TYPE_BANNER
-            is HomeSection.CategoriesSection -> ITEM_TYPE_CATEGORY_LIST
-            is HomeSection.ProductsSection -> ITEM_TYPE_PRODUCT_LIST
-        }
+        return adapterLayoutMode.ordinal
     }
 
     companion object {
@@ -117,5 +77,4 @@ class HomeAdapter(
         const val ITEM_TYPE_CATEGORY_LIST = 3
         const val ITEM_TYPE_PRODUCT_LIST = 4
     }
-
 }
