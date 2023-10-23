@@ -1,5 +1,7 @@
 package com.izzed.indianflavors.presentation.feature.home
 
+import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -7,13 +9,26 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
+import androidx.recyclerview.widget.GridLayoutManager
+import coil.load
+import com.chuckerteam.chucker.api.ChuckerInterceptor
+import com.google.firebase.auth.FirebaseAuth
+import com.izzed.indianflavors.R
 import com.izzed.indianflavors.data.network.api.datasource.RestaurantApiDataSource
 import com.izzed.indianflavors.data.network.api.service.RestaurantApiService
+import com.izzed.indianflavors.data.network.firebase.auth.FirebaseAuthDataSourceImpl
 import com.izzed.indianflavors.data.repository.ProductRepository
 import com.izzed.indianflavors.data.repository.ProductRepositoryImpl
+import com.izzed.indianflavors.data.repository.UserRepository
+import com.izzed.indianflavors.data.repository.UserRepositoryImpl
+import com.izzed.indianflavors.databinding.ActivityRegisterBinding
 import com.izzed.indianflavors.databinding.FragmentHomeBinding
 import com.izzed.indianflavors.model.Menu
+import com.izzed.indianflavors.presentation.feature.cart.CartFragment
+import com.izzed.indianflavors.presentation.feature.checkout.CheckoutActivity
 import com.izzed.indianflavors.presentation.feature.detail.DetailActivity
+import com.izzed.indianflavors.presentation.feature.home.adapter.AdapterLayoutMode
+import com.izzed.indianflavors.presentation.feature.home.adapter.HomeAdapter
 import com.izzed.indianflavors.presentation.feature.home.adapter.subadapter.CategoryAdapter
 import com.izzed.indianflavors.presentation.feature.home.adapter.subadapter.MenuAdapter
 import com.izzed.indianflavors.utils.GenericViewModelFactory
@@ -24,7 +39,7 @@ class HomeFragment : Fragment() {
     private lateinit var binding: FragmentHomeBinding
     private val categoryAdapter: CategoryAdapter by lazy {
         CategoryAdapter{
-
+            viewModel.getMenus(it.name)
         }
     }
     private val menuAdapter: MenuAdapter by lazy {
@@ -38,11 +53,14 @@ class HomeFragment : Fragment() {
     }
 
     private val viewModel: HomeViewModel by viewModels {
-        val service = RestaurantApiService.invoke()
+        val chuckerInterceptor = ChuckerInterceptor(requireContext().applicationContext)
+        val service = RestaurantApiService.invoke(chuckerInterceptor)
         val dataSource = RestaurantApiDataSource(service)
-        val repo: ProductRepository =
-            ProductRepositoryImpl(dataSource)
-        GenericViewModelFactory.create(HomeViewModel(repo))
+        val repo: ProductRepository = ProductRepositoryImpl(dataSource)
+        val firebaseAuth = FirebaseAuth.getInstance()
+        val authDataSource = FirebaseAuthDataSourceImpl(firebaseAuth)
+        val userRepository: UserRepository = UserRepositoryImpl(authDataSource)
+        GenericViewModelFactory.create(HomeViewModel(repo,userRepository))
     }
 
     override fun onCreateView(
@@ -58,6 +76,38 @@ class HomeFragment : Fragment() {
 
         observeData()
         getMenus()
+        setClickListener()
+    }
+
+    private fun setClickListener() {
+        binding.ivCart.setOnClickListener{
+            context?.startActivity(Intent(requireContext(), CartFragment::class.java))
+        }
+        var isIconChanged = false
+
+        binding.ivIbSetupControl.setOnClickListener {
+            if (isIconChanged) {
+                binding.ivIbSetupControl.setImageResource(R.drawable.ic_list)
+                val newLayoutMode = AdapterLayoutMode.LINEAR
+                setAdapterLayoutMode(newLayoutMode)
+            } else {
+                binding.ivIbSetupControl.setImageResource(R.drawable.ic_grid)
+                val newLayoutMode = AdapterLayoutMode.GRID
+                setAdapterLayoutMode(newLayoutMode)
+            }
+            isIconChanged = !isIconChanged
+        }
+
+    }
+
+    private fun setAdapterLayoutMode(newLayoutMode: AdapterLayoutMode) {
+        val preferences = requireActivity().getSharedPreferences("MyAppPreferences", Context.MODE_PRIVATE)
+        val editor = preferences.edit()
+        editor.putInt("layoutMode", newLayoutMode.ordinal)
+        editor.apply()
+
+        val span = if (newLayoutMode == AdapterLayoutMode.LINEAR) 1 else 2
+        (binding.rvProductList.layoutManager as GridLayoutManager).spanCount = span
     }
 
     private fun getMenus() {
@@ -66,6 +116,17 @@ class HomeFragment : Fragment() {
     }
 
     private fun observeData() {
+        viewModel.user.observe(viewLifecycleOwner) { user ->
+            user?.let { userInfo ->
+                binding.tvUsername.text = userInfo.fullName
+                binding.ivProfilePict.load(userInfo.photoUrl){
+                    placeholder(R.drawable.ic_user_profile)
+                    error(R.drawable.ic_user_profile)
+                    crossfade(true)
+                }
+            }
+        }
+
         viewModel.categories.observe(viewLifecycleOwner) {
             it.proceedWhen(doOnSuccess = {
                 binding.layoutStateCategory.root.isVisible = false

@@ -8,16 +8,22 @@ import android.os.Bundle
 import android.widget.Toast
 import androidx.activity.viewModels
 import coil.load
+import com.chuckerteam.chucker.api.ChuckerInterceptor
+import com.google.firebase.auth.FirebaseAuth
 import com.izzed.indianflavors.data.local.database.AppDatabase
 import com.izzed.indianflavors.data.local.database.datasource.CartDataSource
 import com.izzed.indianflavors.data.local.database.datasource.CartDatabaseDataSource
+import com.izzed.indianflavors.data.network.api.datasource.RestaurantApiDataSource
+import com.izzed.indianflavors.data.network.api.service.RestaurantApiService
+import com.izzed.indianflavors.data.network.firebase.auth.FirebaseAuthDataSourceImpl
 import com.izzed.indianflavors.data.repository.CartRepository
 import com.izzed.indianflavors.data.repository.CartRepositoryImpl
+import com.izzed.indianflavors.data.repository.UserRepository
+import com.izzed.indianflavors.data.repository.UserRepositoryImpl
 import com.izzed.indianflavors.databinding.ActivityDetailBinding
-import com.izzed.indianflavors.model.Product
+import com.izzed.indianflavors.model.Menu
 import com.izzed.indianflavors.utils.GenericViewModelFactory
 import com.izzed.indianflavors.utils.proceedWhen
-import com.izzed.indianflavors.utils.toCurrencyFormat
 
 class DetailActivity : AppCompatActivity() {
 
@@ -28,7 +34,13 @@ class DetailActivity : AppCompatActivity() {
         val database = AppDatabase.getInstance(this)
         val cartDao = database.cartDao()
         val cartDataSource: CartDataSource = CartDatabaseDataSource(cartDao)
-        val repo: CartRepository = CartRepositoryImpl(cartDataSource)
+        val chuckerInterceptor = ChuckerInterceptor(this.applicationContext)
+        val service = RestaurantApiService.invoke(chuckerInterceptor)
+        val apiDataSource = RestaurantApiDataSource(service)
+        val firebaseAuth = FirebaseAuth.getInstance()
+        val authDataSource = FirebaseAuthDataSourceImpl(firebaseAuth)
+        val userRepository: UserRepository = UserRepositoryImpl(authDataSource)
+        val repo: CartRepository = CartRepositoryImpl(cartDataSource, apiDataSource, userRepository)
         GenericViewModelFactory.create(
             DetailViewModel(intent?.extras, repo)
         )
@@ -39,7 +51,7 @@ class DetailActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         setClickListener()
-        bindProduct(viewModel.product)
+        bindProduct(viewModel.menu)
         observeData()
     }
 
@@ -61,8 +73,8 @@ class DetailActivity : AppCompatActivity() {
         }
     }
 
-    private fun bindProduct(product: Product?) {
-        product?.let { item ->
+    private fun bindProduct(menu: Menu?) {
+        menu?.let { item ->
             binding.ivProduct.load(item.imgUrl) {
                 crossfade(true)
             }
@@ -98,9 +110,9 @@ class DetailActivity : AppCompatActivity() {
 
     companion object {
         const val EXTRA_PRODUCT = "EXTRA_PRODUCT"
-        fun startActivity(context: Context, product: Product) {
+        fun startActivity(context: Context, menu: Menu) {
             val intent = Intent(context, DetailActivity::class.java)
-            intent.putExtra(EXTRA_PRODUCT, product)
+            intent.putExtra(EXTRA_PRODUCT, menu)
             context.startActivity(intent)
         }
     }
