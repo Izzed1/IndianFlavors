@@ -79,7 +79,7 @@ class RegisterActivity : AppCompatActivity() {
         binding.btnRegister.setOnClickListener {
             doRegister()
         }
-        binding.tvNavToLogin.highLightWord(getString(R.string.text_highlight_login_here)) {
+        binding.tvNavToRegister.highLightWord(getString(R.string.text_highlight_login_here)) {
             navigateToLogin()
         }
     }
