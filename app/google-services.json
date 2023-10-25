@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "378624721884",
+    "project_id": "fir-authexample-izzudin",
+    "storage_bucket": "fir-authexample-izzudin.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:378624721884:android:2d937ffb9100c7a85a8519",
+        "android_client_info": {
+          "package_name": "com.catnip.firebaseauthexample"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCVNIDfBXGY4MG1u4nIO4fi1EE6kYvb5LA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:378624721884:android:c376407d12cd590d5a8519",
+        "android_client_info": {
+          "package_name": "com.izzed.indianflavors"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCVNIDfBXGY4MG1u4nIO4fi1EE6kYvb5LA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
