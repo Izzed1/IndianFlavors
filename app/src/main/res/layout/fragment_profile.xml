@@ -52,7 +52,7 @@
             android:layout_height="48dp"
             android:background="@color/neutral_600"
             android:src="@drawable/ic_button_edit"
-            android:contentDescription="button edit photo"
+            android:contentDescription="@string/content_desc_button_edit_photo"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent" />
     </androidx.constraintlayout.widget.ConstraintLayout>
@@ -84,7 +84,7 @@
             android:layout_height="wrap_content"
             android:fontFamily="@font/poppins_regular"
             android:paddingHorizontal="24dp"
-            android:text="Change Profile" />
+            android:text="@string/text_change_profile" />
 
         <com.google.android.material.progressindicator.CircularProgressIndicator
             android:id="@+id/pb_loading"
@@ -101,7 +101,7 @@
         android:layout_height="wrap_content"
         android:fontFamily="@font/poppins_regular"
         android:padding="8dp"
-        android:text="Change Password"
+        android:text="@string/text_change_password"
         android:textColor="@color/black"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -114,7 +114,7 @@
         android:layout_marginTop="16dp"
         android:fontFamily="@font/poppins_regular"
         android:padding="8dp"
-        android:text="Logout"
+        android:text="@string/text_logout"
         android:textColor="@color/app_color_error"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

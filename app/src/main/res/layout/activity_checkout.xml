@@ -117,7 +117,7 @@
             android:drawableEnd="@drawable/ic_button_arrow"
             android:paddingHorizontal="24dp"
             android:paddingVertical="7dp"
-            android:text="Checkout"
+            android:text="@string/text_checkout"
             app:layout_constraintEnd_toEndOf="parent" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 

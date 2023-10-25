@@ -89,7 +89,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:background="@color/transparant"
-                android:contentDescription="button trash"
+                android:contentDescription="@string/content_desc_button_trash"
                 android:padding="12dp"
                 android:src="@drawable/ic_trash"
                 app:layout_constraintBottom_toBottomOf="parent"

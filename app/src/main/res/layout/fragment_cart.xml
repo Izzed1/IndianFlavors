@@ -77,7 +77,7 @@
                 android:textSize="10sp"
                 android:textStyle="bold"
                 android:textColor="@color/on_color_neutral"
-                android:text="Total :" />
+                android:text="@string/text_total_" />
 
             <TextView
                 android:id="@+id/tv_cart_price"
@@ -87,7 +87,7 @@
                 android:textSize="12sp"
                 android:textStyle="bold"
                 android:textColor="@color/black"
-                android:text="Rp 0" />
+                android:text="@string/text_rp_0" />
         </LinearLayout>
 
         <Button
@@ -97,7 +97,7 @@
             android:background="@drawable/rounded_all_12dp"
             android:paddingVertical="7dp"
             android:paddingHorizontal="24dp"
-            android:text="Checkout"
+            android:text="@string/text_checkout"
             android:drawableEnd="@drawable/ic_button_arrow"
             app:layout_constraintEnd_toEndOf="parent" />
     </androidx.constraintlayout.widget.ConstraintLayout>
