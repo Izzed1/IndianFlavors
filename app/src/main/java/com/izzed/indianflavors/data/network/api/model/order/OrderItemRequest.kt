@@ -1,8 +1,7 @@
 package com.izzed.indianflavors.data.network.api.model.order
 
-
-import com.google.gson.annotations.SerializedName
 import androidx.annotation.Keep
+import com.google.gson.annotations.SerializedName
 
 @Keep
 data class OrderItemRequest(
@@ -13,5 +12,5 @@ data class OrderItemRequest(
     @SerializedName("catatan")
     val notes: String?,
     @SerializedName("harga")
-    val price: Double,
+    val price: Double
 )

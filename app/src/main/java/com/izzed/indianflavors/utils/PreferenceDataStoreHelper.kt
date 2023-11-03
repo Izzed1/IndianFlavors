@@ -20,7 +20,7 @@ interface PreferenceDataStoreHelper {
 class PreferenceDataStoreHelperImpl(private val dataStore: DataStore<Preferences>) :
     PreferenceDataStoreHelper {
     override fun <T> getPreference(key: Preferences.Key<T>, defaultValue: T):
-            Flow<T> = dataStore.data.catch { exception ->
+        Flow<T> = dataStore.data.catch { exception ->
         if (exception is IOException) {
             emit(emptyPreferences())
         } else {
@@ -31,7 +31,7 @@ class PreferenceDataStoreHelperImpl(private val dataStore: DataStore<Preferences
         result
     }
     override suspend fun <T> getFirstPreference(key: Preferences.Key<T>, defaultValue: T):
-            T = dataStore.data.first()[key] ?: defaultValue
+        T = dataStore.data.first()[key] ?: defaultValue
     override suspend fun <T> putPreference(key: Preferences.Key<T>, value: T) {
         dataStore.edit { preferences ->
             preferences[key] = value

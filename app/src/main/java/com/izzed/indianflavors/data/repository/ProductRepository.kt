@@ -15,7 +15,7 @@ interface ProductRepository {
 }
 
 class ProductRepositoryImpl(
-    private val apiDataSource: RestaurantDataSource,
+    private val apiDataSource: RestaurantDataSource
 ) : ProductRepository {
 
     override fun getCategories(): Flow<ResultWrapper<List<Category>>> {

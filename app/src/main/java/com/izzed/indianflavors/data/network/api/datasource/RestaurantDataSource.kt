@@ -13,18 +13,16 @@ interface RestaurantDataSource {
     suspend fun createOrder(orderRequest: OrderRequest): OrderResponse
 }
 
-class RestaurantApiDataSource(private val service: RestaurantApiService): RestaurantDataSource {
+class RestaurantApiDataSource(private val service: RestaurantApiService) : RestaurantDataSource {
     override suspend fun getMenus(category: String?): MenusResponse {
         return service.getMenus(category)
     }
 
-
-    override suspend fun getCategory (): CategoryResponse {
+    override suspend fun getCategory(): CategoryResponse {
         return service.getCategory()
     }
 
     override suspend fun createOrder(orderRequest: OrderRequest): OrderResponse {
         return service.createOrder(orderRequest)
     }
-
 }

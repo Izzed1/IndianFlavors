@@ -6,6 +6,7 @@ plugins {
     id("com.google.devtools.ksp")
     id 'com.google.gms.google-services'
     id 'com.google.firebase.crashlytics'
+    id("org.jlleitschuh.gradle.ktlint")
 }
 
 android {
@@ -47,6 +48,30 @@ android {
         }
         create("integration") {
             buildConfigField("String", "BASE_URL","\"https://d32495a4-6670-46f7-805f-5a796cd591f1.mock.pstmn.io\"")
+        }
+    }
+
+    applicationVariants.all { variant ->
+        variant.sourceSets.java.each {
+            it.srcDirs += "build/generated/ksp/${variant.name}/kotlin"
+        }
+    }
+
+    tasks.getByPath("preBuild").dependsOn("ktlintFormat")
+
+    ktlint {
+        android.set(false)
+        ignoreFailures.set(true)
+        reporters {
+            reporter(org.jlleitschuh.gradle.ktlint.reporter.ReporterType.PLAIN)
+            reporter(org.jlleitschuh.gradle.ktlint.reporter.ReporterType.CHECKSTYLE)
+        }
+        kotlinScriptAdditionalPaths {
+            include(fileTree("scripts/"))
+        }
+        filter {
+            exclude("**/generated/**")
+            include("**/kotlin/**")
         }
     }
 }
@@ -91,6 +116,8 @@ dependencies {
     implementation ("com.squareup.retrofit2:retrofit:2.9.0")
     implementation ("com.squareup.retrofit2:converter-gson:2.9.0")
     implementation ("com.squareup.okhttp3:okhttp:4.11.0")
+    // koin
+    implementation ("io.insert-koin:koin-android:3.5.0")
 
     debugImplementation ("com.github.chuckerteam.chucker:library:4.0.0")
     releaseImplementation ("com.github.chuckerteam.chucker:library-no-op:4.0.0")

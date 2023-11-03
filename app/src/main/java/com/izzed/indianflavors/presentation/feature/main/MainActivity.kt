@@ -1,19 +1,12 @@
 package com.izzed.indianflavors.presentation.feature.main
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import androidx.activity.viewModels
+import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.findNavController
-import androidx.navigation.ui.AppBarConfiguration
-import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.izzed.indianflavors.R
-import com.izzed.indianflavors.data.local.datastore.UserPreferenceDataSourceImpl
-import com.izzed.indianflavors.data.local.datastore.appDataStore
 import com.izzed.indianflavors.databinding.ActivityMainBinding
-import com.izzed.indianflavors.utils.GenericViewModelFactory
-import com.izzed.indianflavors.utils.PreferenceDataStoreHelperImpl
 
 class MainActivity : AppCompatActivity() {
 
@@ -26,7 +19,6 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         setupButtonNav()
-
     }
 
     private fun setupButtonNav() {

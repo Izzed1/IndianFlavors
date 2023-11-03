@@ -9,7 +9,7 @@ import com.izzed.indianflavors.utils.ResultWrapper
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
-class LoginViewModel(private val repository: UserRepository): ViewModel() {
+class LoginViewModel(private val repository: UserRepository) : ViewModel() {
 
     private val _loginResult = MutableLiveData<ResultWrapper<Boolean>>()
     val loginResult: LiveData<ResultWrapper<Boolean>>

@@ -3,7 +3,6 @@ package com.izzed.indianflavors.presentation.feature.profile
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -12,7 +11,7 @@ import androidx.activity.result.PickVisualMediaRequest
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AlertDialog
 import androidx.core.view.isVisible
-import androidx.fragment.app.viewModels
+import androidx.fragment.app.Fragment
 import coil.load
 import coil.transform.CircleCropTransformation
 import com.google.firebase.auth.FirebaseAuth
@@ -21,16 +20,14 @@ import com.izzed.indianflavors.data.network.firebase.auth.FirebaseAuthDataSource
 import com.izzed.indianflavors.data.repository.UserRepositoryImpl
 import com.izzed.indianflavors.databinding.FragmentProfileBinding
 import com.izzed.indianflavors.presentation.feature.login.LoginActivity
-import com.izzed.indianflavors.utils.GenericViewModelFactory
 import com.izzed.indianflavors.utils.proceedWhen
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class ProfileFragment : Fragment() {
 
     private lateinit var binding: FragmentProfileBinding
 
-    private val viewModel: ProfileViewModel by viewModels {
-        GenericViewModelFactory.create(createViewModel())
-    }
+    private val viewModel: ProfileViewModel by viewModel()
 
     private fun createViewModel(): ProfileViewModel {
         val firebaseAuth = FirebaseAuth.getInstance()
@@ -51,7 +48,8 @@ class ProfileFragment : Fragment() {
     }
 
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
+        inflater: LayoutInflater,
+        container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         binding = FragmentProfileBinding.inflate(inflater, container, false)
@@ -71,9 +69,9 @@ class ProfileFragment : Fragment() {
                 Toast.makeText(requireContext(), "Change Photo Profile Success !", Toast.LENGTH_SHORT).show()
                 showUserData()
             }, doOnError = {
-                Toast.makeText(requireContext(), "Change Photo Profile Failed !", Toast.LENGTH_SHORT).show()
-                showUserData()
-            })
+                    Toast.makeText(requireContext(), "Change Photo Profile Failed !", Toast.LENGTH_SHORT).show()
+                    showUserData()
+                })
         }
         viewModel.changeProfileResult.observe(viewLifecycleOwner) {
             it.proceedWhen(
@@ -86,7 +84,6 @@ class ProfileFragment : Fragment() {
                     binding.pbLoading.isVisible = false
                     binding.btnChangeProfile.isVisible = true
                     Toast.makeText(requireContext(), "Change Profile data Failed !", Toast.LENGTH_SHORT).show()
-
                 },
                 doOnLoading = {
                     binding.pbLoading.isVisible = true
@@ -95,7 +92,6 @@ class ProfileFragment : Fragment() {
             )
         }
     }
-
 
     private fun setClickListeners() {
         binding.btnChangeProfile.setOnClickListener {
@@ -125,15 +121,17 @@ class ProfileFragment : Fragment() {
             .setNegativeButton(
                 "No"
             ) { dialog, id ->
-                //no-op , do nothing
+                // no-op , do nothing
             }.create()
         dialog.show()
     }
 
     private fun navigateToLogin() {
-        startActivity(Intent(requireContext(), LoginActivity::class.java).apply {
-            flags = Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK
-        })
+        startActivity(
+            Intent(requireContext(), LoginActivity::class.java).apply {
+                flags = Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK
+            }
+        )
     }
 
     private fun requestChangePassword() {
@@ -143,7 +141,6 @@ class ProfileFragment : Fragment() {
             .setPositiveButton(
                 "Okay"
             ) { dialog, id ->
-
             }.create()
         dialog.show()
     }

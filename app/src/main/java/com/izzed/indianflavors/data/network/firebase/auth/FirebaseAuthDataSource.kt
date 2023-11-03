@@ -32,7 +32,6 @@ interface FirebaseAuthDataSource { // datasource adalah sumber data
     fun getCurrentUser(): FirebaseUser?
 
     fun doLogout(): Boolean
-
 }
 
 class FirebaseAuthDataSourceImpl(private val firebaseAuth: FirebaseAuth) : FirebaseAuthDataSource {

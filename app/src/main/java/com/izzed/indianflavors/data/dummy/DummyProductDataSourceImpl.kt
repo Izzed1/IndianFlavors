@@ -6,8 +6,8 @@ interface DummyProductDataSource {
     fun getProducts(): List<Menu>
 }
 
-class  DummyProductDataSourceImpl(): DummyProductDataSource {
-    override fun getProducts(): List<Menu> = listOf (
+class DummyProductDataSourceImpl() : DummyProductDataSource {
+    override fun getProducts(): List<Menu> = listOf(
         Menu(
             name = "Keema Biryani",
             price = 42000.0,

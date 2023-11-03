@@ -13,21 +13,24 @@ class MenuAdapter(private val itemClick: (Menu) -> Unit) :
     RecyclerView.Adapter<MenuAdapter.ItemProductViewHolder>() {
 
     private val dataDiffer =
-        AsyncListDiffer(this, object : DiffUtil.ItemCallback<Menu>() {
-            override fun areItemsTheSame(
-                oldItem: Menu,
-                newItem: Menu
-            ): Boolean {
-                return oldItem.name == newItem.name
-            }
+        AsyncListDiffer(
+            this,
+            object : DiffUtil.ItemCallback<Menu>() {
+                override fun areItemsTheSame(
+                    oldItem: Menu,
+                    newItem: Menu
+                ): Boolean {
+                    return oldItem.name == newItem.name
+                }
 
-            override fun areContentsTheSame(
-                oldItem: Menu,
-                newItem: Menu
-            ): Boolean {
-                return oldItem.hashCode() == newItem.hashCode()
+                override fun areContentsTheSame(
+                    oldItem: Menu,
+                    newItem: Menu
+                ): Boolean {
+                    return oldItem.hashCode() == newItem.hashCode()
+                }
             }
-        })
+        )
 
     fun submitData(data: List<Menu>) {
         dataDiffer.submitList(data)
@@ -51,7 +54,7 @@ class MenuAdapter(private val itemClick: (Menu) -> Unit) :
 
         fun bindView(item: Menu) {
             with(item) {
-                binding.ivProduct.load(item.imgUrl){
+                binding.ivProduct.load(item.imgUrl) {
                     crossfade(true)
                 }
                 binding.tvProductName.text = item.name
@@ -61,4 +64,3 @@ class MenuAdapter(private val itemClick: (Menu) -> Unit) :
         }
     }
 }
-
