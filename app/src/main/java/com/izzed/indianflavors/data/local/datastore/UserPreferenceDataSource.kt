@@ -1,6 +1,5 @@
 package com.izzed.indianflavors.data.local.datastore
 
-import androidx.datastore.preferences.core.booleanPreferencesKey
 import com.izzed.indianflavors.utils.PreferenceDataStoreHelper
 import kotlinx.coroutines.flow.Flow
 
@@ -14,7 +13,6 @@ class UserPreferenceDataSourceImpl(private val preferenceHelper: PreferenceDataS
     UserPreferenceDataSource {
 
     companion object {
-        val PREF_USER_DARK_MODE = booleanPreferencesKey("PREF_USER_DARK_MODE")
     }
 
     override suspend fun getUserLayoutProductPref(): Boolean {

@@ -1,6 +1,5 @@
 package com.izzed.indianflavors.data.repository
 
-import androidx.fragment.app.viewModels
 import com.izzed.indianflavors.data.local.database.datasource.CartDataSource
 import com.izzed.indianflavors.data.local.database.entity.CartEntity
 import com.izzed.indianflavors.data.local.database.mapper.toCartEntity
@@ -10,8 +9,6 @@ import com.izzed.indianflavors.data.network.api.model.order.OrderItemRequest
 import com.izzed.indianflavors.data.network.api.model.order.OrderRequest
 import com.izzed.indianflavors.model.Cart
 import com.izzed.indianflavors.model.Menu
-import com.izzed.indianflavors.presentation.feature.profile.ProfileViewModel
-import com.izzed.indianflavors.utils.GenericViewModelFactory
 import com.izzed.indianflavors.utils.ResultWrapper
 import com.izzed.indianflavors.utils.proceed
 import com.izzed.indianflavors.utils.proceedFlow
@@ -52,10 +49,11 @@ class CartRepositoryImpl(
                     Pair(result, totalPrice)
                 }
             }.map {
-                if (it.payload?.first?.isEmpty() == true)
+                if (it.payload?.first?.isEmpty() == true) {
                     ResultWrapper.Empty(it.payload)
-                else
+                } else {
                     it
+                }
             }
             .onStart {
                 emit(ResultWrapper.Loading())

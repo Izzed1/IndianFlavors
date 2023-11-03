@@ -18,8 +18,10 @@ import java.util.concurrent.TimeUnit
 interface RestaurantApiService {
     @GET("listmenu")
     suspend fun getMenus(@Query("c") category: String? = null): MenusResponse
+
     @GET("category")
     suspend fun getCategory(): CategoryResponse
+
     @POST("order")
     suspend fun createOrder(@Body orderRequest: OrderRequest): OrderResponse
 

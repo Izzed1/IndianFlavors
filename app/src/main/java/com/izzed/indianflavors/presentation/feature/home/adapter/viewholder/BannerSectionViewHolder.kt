@@ -6,9 +6,8 @@ import com.izzed.indianflavors.databinding.ItemSectionBannerHomeBinding
 import com.izzed.indianflavors.presentation.feature.home.adapter.model.HomeSection
 
 class BannerSectionViewHolder(
-    private val binding : ItemSectionBannerHomeBinding
+    private val binding: ItemSectionBannerHomeBinding
 ) : RecyclerView.ViewHolder(binding.root), ViewHolderBinder<HomeSection> {
     override fun bind(item: HomeSection) {
-
     }
 }

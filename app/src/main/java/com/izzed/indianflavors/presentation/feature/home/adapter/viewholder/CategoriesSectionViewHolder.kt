@@ -8,7 +8,7 @@ import com.izzed.indianflavors.presentation.feature.home.adapter.model.HomeSecti
 import com.izzed.indianflavors.presentation.feature.home.adapter.subadapter.CategoryAdapter
 
 class CategoriesSectionViewHolder(
-    private val binding: ItemSectionCategoryHomeBinding,
+    private val binding: ItemSectionCategoryHomeBinding
 ) : RecyclerView.ViewHolder(binding.root), ViewHolderBinder<HomeSection> {
     private val adapter: CategoryAdapter by lazy {
         CategoryAdapter {
@@ -16,7 +16,7 @@ class CategoriesSectionViewHolder(
         }
     }
     override fun bind(item: HomeSection) {
-        if(item is HomeSection.CategoriesSection){
+        if (item is HomeSection.CategoriesSection) {
             binding.rvCategory.apply {
                 adapter = this@CategoriesSectionViewHolder.adapter
             }

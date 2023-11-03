@@ -1,8 +1,7 @@
 package com.izzed.indianflavors.data.network.api.model.menu
 
-
-import com.google.gson.annotations.SerializedName
 import androidx.annotation.Keep
+import com.google.gson.annotations.SerializedName
 import com.izzed.indianflavors.model.Menu
 
 @Keep
@@ -29,4 +28,3 @@ fun MenuItemResponse.toProduct() = Menu(
 )
 
 fun Collection<MenuItemResponse>.toProductList() = this.map { it.toProduct() }
-

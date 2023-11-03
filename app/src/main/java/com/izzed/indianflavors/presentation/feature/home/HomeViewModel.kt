@@ -1,23 +1,20 @@
 package com.izzed.indianflavors.presentation.feature.home
 
-import android.widget.Toast
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.izzed.indianflavors.data.repository.ProductRepository
-import com.izzed.indianflavors.data.repository.UserRepository
 import com.izzed.indianflavors.model.Category
 import com.izzed.indianflavors.model.Menu
 import com.izzed.indianflavors.model.User
 import com.izzed.indianflavors.utils.ResultWrapper
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
-class HomeViewModel(
-    private val repository: ProductRepository,
-    private val userRepository: UserRepository
+class HomeViewModel @Inject constructor(
+    private val repository: ProductRepository
 ) : ViewModel() {
 
     // Buat Livedata category dan menu
@@ -30,12 +27,12 @@ class HomeViewModel(
         get() = _categories
 
     private val _menus = MutableLiveData<ResultWrapper<List<Menu>>>()
-    val menus : LiveData<ResultWrapper<List<Menu>>>
+    val menus: LiveData<ResultWrapper<List<Menu>>>
         get() = _menus
 
     fun getCategories() {
         viewModelScope.launch(Dispatchers.IO) {
-            repository.getCategories().collect{
+            repository.getCategories().collect {
                 _categories.postValue(it)
             }
         }
@@ -43,7 +40,7 @@ class HomeViewModel(
 
     fun getMenus(category: String? = null) {
         viewModelScope.launch(Dispatchers.IO) {
-            repository.getMenus(if(category == "All") null else category?.lowercase()).collect{
+            repository.getMenus(if (category == "All") null else category?.lowercase()).collect {
                 _menus.postValue(it)
             }
         }

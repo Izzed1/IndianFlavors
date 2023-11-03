@@ -6,9 +6,8 @@ import androidx.lifecycle.viewModelScope
 import com.izzed.indianflavors.data.repository.CartRepository
 import com.izzed.indianflavors.model.Cart
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
 import kotlinx.coroutines.flow.collect
-
+import kotlinx.coroutines.launch
 
 class CartViewModel(private val repo: CartRepository) : ViewModel() {
 

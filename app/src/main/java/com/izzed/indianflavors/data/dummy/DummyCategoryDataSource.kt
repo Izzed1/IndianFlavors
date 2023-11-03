@@ -6,7 +6,7 @@ interface DummyCategoryDataSource {
     fun getCategories(): List<Category>
 }
 
-class DummyCategoryDataSourceImpl(): DummyCategoryDataSource {
+class DummyCategoryDataSourceImpl() : DummyCategoryDataSource {
     override fun getCategories(): List<Category> = listOf(
         Category(
             name = "Biryani",
@@ -23,6 +23,6 @@ class DummyCategoryDataSourceImpl(): DummyCategoryDataSource {
         Category(
             name = "Baverages",
             categoryImgUrl = "https://github.com/Izzed1/asset-code_challenge/blob/main/Assets/ic_category_baverages.png?raw=true"
-        ),
+        )
     )
 }

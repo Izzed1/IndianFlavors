@@ -1,15 +1,14 @@
 package com.izzed.indianflavors.presentation.splashscreen
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.activity.viewModels
+import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
 import com.google.firebase.auth.FirebaseAuth
 import com.izzed.indianflavors.data.network.firebase.auth.FirebaseAuthDataSourceImpl
 import com.izzed.indianflavors.data.repository.UserRepositoryImpl
 import com.izzed.indianflavors.databinding.ActivitySplashBinding
-import com.izzed.indianflavors.presentation.feature.home.adapter.HomeAdapter
 import com.izzed.indianflavors.presentation.feature.login.LoginActivity
 import com.izzed.indianflavors.presentation.feature.main.MainActivity
 import com.izzed.indianflavors.utils.GenericViewModelFactory
@@ -51,14 +50,18 @@ class SplashActivity : AppCompatActivity() {
     }
 
     private fun navigateToLogin() {
-        startActivity(Intent(this, LoginActivity::class.java).apply {
-            flags = Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK
-        })
+        startActivity(
+            Intent(this, LoginActivity::class.java).apply {
+                flags = Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK
+            }
+        )
     }
 
     private fun navigateToMain() {
-        startActivity(Intent(this, MainActivity::class.java).apply {
-            flags = Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK
-        })
+        startActivity(
+            Intent(this, MainActivity::class.java).apply {
+                flags = Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK
+            }
+        )
     }
 }

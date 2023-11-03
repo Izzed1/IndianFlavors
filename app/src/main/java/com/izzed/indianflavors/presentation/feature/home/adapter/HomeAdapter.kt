@@ -6,20 +6,10 @@ import androidx.recyclerview.widget.AsyncListDiffer
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.izzed.indianflavors.core.ViewHolderBinder
-import com.izzed.indianflavors.databinding.ItemEmptyViewHolderBinding
 import com.izzed.indianflavors.databinding.ItemGridProductBinding
 import com.izzed.indianflavors.databinding.ItemListProductBinding
-import com.izzed.indianflavors.databinding.ItemSectionBannerHomeBinding
-import com.izzed.indianflavors.databinding.ItemSectionCategoryHomeBinding
-import com.izzed.indianflavors.databinding.ItemSectionHeaderHomeBinding
-import com.izzed.indianflavors.databinding.ItemSectionProductHomeBinding
 import com.izzed.indianflavors.model.Menu
 import com.izzed.indianflavors.presentation.feature.home.adapter.model.HomeSection
-import com.izzed.indianflavors.presentation.feature.home.adapter.viewholder.BannerSectionViewHolder
-import com.izzed.indianflavors.presentation.feature.home.adapter.viewholder.CategoriesSectionViewHolder
-import com.izzed.indianflavors.presentation.feature.home.adapter.viewholder.EmptyViewHolder
-import com.izzed.indianflavors.presentation.feature.home.adapter.viewholder.HeaderSectionViewHolder
-import com.izzed.indianflavors.presentation.feature.home.adapter.viewholder.ProductsSectionViewHolder
 
 class HomeAdapter(
     var adapterLayoutMode: AdapterLayoutMode,
@@ -27,35 +17,44 @@ class HomeAdapter(
 ) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     private val dataDiffer =
-        AsyncListDiffer(this, object : DiffUtil.ItemCallback<HomeSection>() {
-            override fun areItemsTheSame(
-                oldItem: HomeSection,
-                newItem: HomeSection
-            ): Boolean {
-                return oldItem.id == newItem.id
+        AsyncListDiffer(
+            this,
+            object : DiffUtil.ItemCallback<HomeSection>() {
+                override fun areItemsTheSame(
+                    oldItem: HomeSection,
+                    newItem: HomeSection
+                ): Boolean {
+                    return oldItem.id == newItem.id
+                }
+                override fun areContentsTheSame(
+                    oldItem: HomeSection,
+                    newItem: HomeSection
+                ): Boolean {
+                    return oldItem.hashCode() == newItem.hashCode()
+                }
             }
-            override fun areContentsTheSame(
-                oldItem: HomeSection,
-                newItem: HomeSection
-            ): Boolean {
-                return oldItem.hashCode() == newItem.hashCode()
-            }
-        })
+        )
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         return when (viewType) {
             AdapterLayoutMode.GRID.ordinal -> {
                 GridMenuItemViewHolder(
                     binding = ItemGridProductBinding.inflate(
-                        LayoutInflater.from(parent.context),parent,false
-                    ),onProductClicked
+                        LayoutInflater.from(parent.context),
+                        parent,
+                        false
+                    ),
+                    onProductClicked
                 )
             }
             else -> {
                 LinearMenuItemViewHolder(
                     binding = ItemListProductBinding.inflate(
-                        LayoutInflater.from(parent.context),parent,false
-                    ),onProductClicked
+                        LayoutInflater.from(parent.context),
+                        parent,
+                        false
+                    ),
+                    onProductClicked
                 )
             }
         }
