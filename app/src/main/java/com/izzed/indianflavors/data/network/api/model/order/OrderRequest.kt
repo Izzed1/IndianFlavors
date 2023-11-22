@@ -5,8 +5,6 @@ import com.google.gson.annotations.SerializedName
 
 @Keep
 data class OrderRequest(
-    @SerializedName("username")
-    val username: String?,
     @SerializedName("total")
     val total: Int?,
     @SerializedName("orders")

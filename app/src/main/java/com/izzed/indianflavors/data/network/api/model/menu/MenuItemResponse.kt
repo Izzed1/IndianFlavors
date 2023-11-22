@@ -11,7 +11,7 @@ data class MenuItemResponse(
     @SerializedName("detail")
     val desc: String?,
     @SerializedName("harga")
-    val price: Double?,
+    val price: Int?,
     @SerializedName("harga_format")
     val formattedPrice: String?,
     @SerializedName("image_url")
@@ -22,7 +22,7 @@ data class MenuItemResponse(
 
 fun MenuItemResponse.toProduct() = Menu(
     name = this.name.orEmpty(),
-    price = this.price ?: 0.0,
+    price = this.price ?: 0,
     imgUrl = this.imageUrl.orEmpty(),
     desc = this.desc.orEmpty()
 )

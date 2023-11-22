@@ -85,7 +85,7 @@ class CheckoutActivity : AppCompatActivity() {
                 binding.clContainerButton.isVisible = true
                 result.payload?.let { (carts, totalPrice) ->
                     adapter.submitData(carts)
-                    binding.tvCartPrice.text = totalPrice.toCurrencyFormat()
+                    binding.tvCartPrice.text = totalPrice.toDouble().toCurrencyFormat()
                 }
             }, doOnLoading = {
                     binding.layoutState.root.isVisible = true
@@ -108,7 +108,7 @@ class CheckoutActivity : AppCompatActivity() {
                     binding.layoutState.tvError.isVisible = true
                     binding.layoutState.tvError.text = getString(R.string.text_cart_is_empty)
                     data.payload?.let { (_, totalPrice) ->
-                        binding.tvCartPrice.text = totalPrice.toCurrencyFormat()
+                        binding.tvCartPrice.text = totalPrice.toDouble().toCurrencyFormat()
                     }
                     binding.layoutContent.root.isVisible = false
                     binding.layoutContent.rvCart.isVisible = false

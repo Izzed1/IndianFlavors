@@ -14,13 +14,15 @@ import com.izzed.indianflavors.utils.proceed
 import com.izzed.indianflavors.utils.proceedFlow
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.onStart
+import java.lang.Exception
 import java.lang.IllegalStateException
 
 interface CartRepository {
-    fun getUserCardData(): Flow<ResultWrapper<Pair<List<Cart>, Double>>>
+    fun getUserCardData(): Flow<ResultWrapper<Pair<List<Cart>, Int>>>
     suspend fun createCart(menu: Menu, totalQuantity: Int): Flow<ResultWrapper<Boolean>>
     suspend fun decreaseCart(item: Cart): Flow<ResultWrapper<Boolean>>
     suspend fun increaseCart(item: Cart): Flow<ResultWrapper<Boolean>>
@@ -32,11 +34,10 @@ interface CartRepository {
 
 class CartRepositoryImpl(
     private val dataSource: CartDataSource,
-    private val restaurantDataSource: RestaurantDataSource,
-    private val userRepository: UserRepository
+    private val restaurantDataSource: RestaurantDataSource
 ) : CartRepository {
 
-    override fun getUserCardData(): Flow<ResultWrapper<Pair<List<Cart>, Double>>> {
+    override fun getUserCardData(): Flow<ResultWrapper<Pair<List<Cart>, Int>>> {
         return dataSource.getAllCarts()
             .map {
                 proceed {
@@ -55,7 +56,9 @@ class CartRepositoryImpl(
                     it
                 }
             }
-            .onStart {
+            .catch {
+                emit(ResultWrapper.Error(Exception(it)))
+            }.onStart {
                 emit(ResultWrapper.Loading())
                 delay(2000)
             }
@@ -78,7 +81,7 @@ class CartRepositoryImpl(
                 affectedRow > 0
             }
         } ?: flow {
-            emit(ResultWrapper.Error(IllegalStateException("Product ID not found")))
+            emit(ResultWrapper.Error(IllegalStateException("Product Name not found")))
         }
     }
 
@@ -110,12 +113,11 @@ class CartRepositoryImpl(
 
     override suspend fun order(items: List<Cart>): Flow<ResultWrapper<Boolean>> {
         val orderItems = items.map {
-            OrderItemRequest(it.productName, it.itemQuantity, it.itemNotes, it.productPrice)
+            OrderItemRequest(it.productName, it.itemQuantity, it.itemNotes, it.productPrice.toDouble())
         }
 
-        val username = userRepository.getCurrentUser()?.fullName
-        val total = items.sumByDouble { it.itemQuantity * it.productPrice }
-        val orderRequest = OrderRequest(username, total.toInt(), orderItems)
+        val total = items.sumByDouble { it.itemQuantity * it.productPrice.toDouble() }
+        val orderRequest = OrderRequest(total.toInt(), orderItems)
 
         return proceedFlow {
             val response = restaurantDataSource.createOrder(orderRequest)
