@@ -58,7 +58,7 @@ object AppModules {
 
     private val repositoryModule = module {
         single<UserRepository> { UserRepositoryImpl(get()) }
-        single<CartRepository> { CartRepositoryImpl(get(), get(), get()) }
+        single<CartRepository> { CartRepositoryImpl(get(), get()) }
         single<ProductRepository> { ProductRepositoryImpl(get()) }
     }
 

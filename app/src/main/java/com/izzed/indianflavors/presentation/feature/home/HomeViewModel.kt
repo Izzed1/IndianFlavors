@@ -7,7 +7,6 @@ import androidx.lifecycle.viewModelScope
 import com.izzed.indianflavors.data.repository.ProductRepository
 import com.izzed.indianflavors.model.Category
 import com.izzed.indianflavors.model.Menu
-import com.izzed.indianflavors.model.User
 import com.izzed.indianflavors.utils.ResultWrapper
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -16,11 +15,6 @@ import javax.inject.Inject
 class HomeViewModel @Inject constructor(
     private val repository: ProductRepository
 ) : ViewModel() {
-
-    // Buat Livedata category dan menu
-    private val _user = MutableLiveData<User?>()
-    val user: LiveData<User?>
-        get() = _user
 
     private val _categories = MutableLiveData<ResultWrapper<List<Category>>>()
     val categories: LiveData<ResultWrapper<List<Category>>>

@@ -78,6 +78,7 @@ class CartFragment : Fragment() {
                 binding.layoutState.pbLoading.isVisible = false
                 binding.layoutState.tvError.isVisible = false
                 binding.rvCart.isVisible = true
+                binding.clActionCheckout.isVisible = true
                 result.payload?.let { (carts, totalPrice) ->
                     adapter.submitData(carts)
                     binding.tvCartPrice.text = totalPrice.toString()
@@ -87,12 +88,14 @@ class CartFragment : Fragment() {
                     binding.layoutState.pbLoading.isVisible = true
                     binding.layoutState.tvError.isVisible = false
                     binding.rvCart.isVisible = false
+                    binding.clActionCheckout.isVisible = false
                 }, doOnError = { err ->
                     binding.layoutState.root.isVisible = true
                     binding.layoutState.pbLoading.isVisible = false
                     binding.layoutState.tvError.isVisible = true
                     binding.layoutState.tvError.text = err.exception?.message.orEmpty()
                     binding.rvCart.isVisible = false
+                    binding.clActionCheckout.isVisible = false
                 }, doOnEmpty = { data ->
                     binding.layoutState.root.isVisible = true
                     binding.layoutState.pbLoading.isVisible = false
@@ -102,6 +105,7 @@ class CartFragment : Fragment() {
                         binding.tvCartPrice.text = totalPrice.toString()
                     }
                     binding.rvCart.isVisible = false
+                    binding.clActionCheckout.isVisible = false
                 })
         }
     }

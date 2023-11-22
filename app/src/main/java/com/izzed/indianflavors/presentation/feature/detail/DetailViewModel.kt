@@ -16,8 +16,8 @@ class DetailViewModel(
 ) : ViewModel() {
     val menu = extras?.getParcelable<Menu>(DetailActivity.EXTRA_PRODUCT)
 
-    val priceLiveData = MutableLiveData<Double>().apply {
-        postValue(0.0)
+    val priceLiveData = MutableLiveData<Int>().apply {
+        postValue(0)
     }
     val productCountLiveData = MutableLiveData<Int>().apply {
         postValue(0)
@@ -29,14 +29,14 @@ class DetailViewModel(
     fun pluss() {
         val count = (productCountLiveData.value ?: 0) + 1
         productCountLiveData.postValue(count)
-        priceLiveData.postValue(menu?.price?.times(count) ?: 0.0)
+        priceLiveData.postValue(menu?.price?.times(count) ?: 0)
     }
 
     fun minus() {
         if ((productCountLiveData.value ?: 0) > 0) {
             val count = (productCountLiveData.value ?: 0) - 1
             productCountLiveData.postValue(count)
-            priceLiveData.postValue(menu?.price?.times(count) ?: 0.0)
+            priceLiveData.postValue(menu?.price?.times(count) ?: 0)
         }
     }
 
